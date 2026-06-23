@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XUE-CDN // CENTRAL CONTROL STATION</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Courier New', Courier, monospace; }
+        body { background-color: #050507; color: #c9ccd3; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 40px; overflow-x: hidden; }
+        .container { width: 100%; max-width: 900px; background: rgba(255, 255, 255, 0.005); border: 1px solid #1c1e24; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.9); }
+        .terminal-header { background: #0c0d12; border-bottom: 1px solid #1c1e24; padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; }
+        .terminal-title { font-size: 12px; letter-spacing: 3px; color: #848a99; font-weight: 600; }
+        .status-indicator { display: flex; align-items: center; gap: 10px; font-size: 11px; color: #10b981; letter-spacing: 1px; }
+        .dot { width: 6px; height: 6px; background-color: #10b981; animation: blink 2s infinite; }
+        @keyframes blink { 0%, 100% { opacity: 0.2; } 50% { opacity: 1; } }
+        .panel-section { padding: 30px; border-bottom: 1px solid #1c1e24; }
+        .panel-section:last-child { border-bottom: none; }
+        .section-title { font-size: 10px; color: #4f5666; letter-spacing: 4px; margin-bottom: 25px; text-transform: uppercase; display: flex; align-items: center; gap: 15px; }
+        .section-title::after { content: ''; flex-grow: 1; height: 1px; background: #1c1e24; }
+        .grid-matrix { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 10px; }
+        .matrix-item { border-left: 1px solid #3b4252; padding-left: 20px; background: rgba(255,255,255,0.002); padding-top: 10px; padding-bottom: 10px; }
+        .matrix-label { font-size: 10px; color: #4f5666; letter-spacing: 1px; margin-bottom: 6px; }
+        .matrix-value { font-size: 18px; color: #d1d5db; font-weight: 500; }
+        .asset-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+        .asset-card { background: rgba(255,255,255,0.001); border: 1px solid #1c1e24; padding: 24px; position: relative; }
+        .asset-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 4px; background: #3b4252; }
+        .asset-type { font-size: 9px; color: #4f5666; margin-bottom: 8px; letter-spacing: 2px; }
+        .asset-name { font-size: 13px; color: #e5e7eb; margin-bottom: 20px; letter-spacing: 1px; }
+        .asset-status { font-size: 11px; color: #6b7280; display: flex; justify-content: space-between; border-top: 1px dashed #1c1e24; padding-top: 12px; }
+        .console-box { background: #08090c; border: 1px solid #1c1e24; padding: 20px; height: 160px; overflow-y: auto; font-size: 11px; color: #4f5666; line-height: 1.8; }
+        .log-line { display: flex; margin-bottom: 4px; }
+        .timestamp { color: #2a2f3a; margin-right: 15px; }
+        .success { color: #10b981; }
+        .accent { color: #848a99; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="terminal-header">
+            <div class="terminal-title">STATION // XUE-ASSETS-SERVER</div>
+            <div class="status-indicator"><div class="dot"></div><span>NODE_ONLINE // PORT_80</span></div>
+        </div>
+        <div class="panel-section">
+            <div class="section-title">SYSTEM MATRIX</div>
+            <div class="grid-matrix">
+                <div class="matrix-item"><div class="matrix-label">CORE STATUS</div><div class="matrix-value" style="color: #10b981;">ACTIVE</div></div>
+                <div class="matrix-item"><div class="matrix-label">BANDWIDTH</div><div class="matrix-value">UNLIMITED</div></div>
+                <div class="matrix-item"><div class="matrix-label">COMPRESSION</div><div class="matrix-value" style="color: #ef4444;">0% BYPASS</div></div>
+            </div>
+        </div>
+        <div class="panel-section">
+            <div class="section-title">STORAGE MODULES ARCHITECTURE</div>
+            <div class="asset-grid">
+                <div class="asset-card">
+                    <div class="asset-type">AUDIO // STREAM</div>
+                    <div class="asset-name">*.mp3 SOURCE CONTAINER</div>
+                    <div class="asset-status"><span>CORS_ALLOW</span><span style="color: #848a99;">READY</span></div>
+                </div>
+                <div class="asset-card">
+                    <div class="asset-type">VECTOR // FONT</div>
+                    <div class="asset-name">*.ttf CHARACTER MAP</div>
+                    <div class="asset-status"><span>PIXEL_PERFECT</span><span style="color: #848a99;">READY</span></div>
+                </div>
+                <div class="asset-card">
+                    <div class="asset-type">IMAGE // DYNAMIC</div>
+                    <div class="asset-name">*.gif ANIMATION FRAME</div>
+                    <div class="asset-status"><span>100%_RAW</span><span style="color: #848a99;">READY</span></div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-section">
+            <div class="section-title">TERMINAL LIVE FEED</div>
+            <div class="console-box">
+                <div class="log-line"><span class="timestamp">[17:08:46]</span><span class="accent">INITIALIZING ASSETS ROOT GATEWAY...</span></div>
+                <div class="log-line"><span class="timestamp">[17:08:47]</span><span class="success">SUCCESS // BINDING GITHUB PAGES REPOSITORY [xue-cdn]</span></div>
+                <div class="log-line"><span class="timestamp">[17:08:48]</span><span class="accent">CROSS-ORIGIN RESOURCE SHARING (CORS) CONFIG: LEVEL_ALL_ALLOWED</span></div>
+                <div class="log-line"><span class="timestamp">[17:08:49]</span><span class="success">READY // AWAITING EXTERNAL MULTIMEDIA VECTOR PIPELINE FETCH...</span></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
